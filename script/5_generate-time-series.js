@@ -32,7 +32,7 @@ const DB_PATH = path.join(
 /* Added new json output */
 const FREQ_JSON_OUTPUT_PATH = path.join(
     import.meta.dirname,
-    "../data/nodeColours.json",
+    "../data/node-colours.json",
 )
 
 const db = openDB(

@@ -63,6 +63,7 @@ const config = {
                 type: "base-layer",
                 tileSource: "./tiles/{z}/{x}/{y}.pbf",
                 tileMetadata: "./tiles/metadata.json",
+                nodeColours: "./node-colours.json",
                 conferences: INTERESTED_CONFERENCES.map(([label]) => label),
                 conferenceColors: CONFERENCE_COLORS,
             },

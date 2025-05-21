@@ -26,6 +26,7 @@ export default class PluginGLLayer extends HTMLElement {
   conferenceColors = [];
   metadataStateKey = "metadata";
   //#endregion
+  
 
   #layerInstance;
   #conferenceSelections;
@@ -86,6 +87,7 @@ export default class PluginGLLayer extends HTMLElement {
         map.on("click", `points_${i}`, async (e) => {
           const feature = e.features?.[0];
           const metadata = { ...feature.properties };
+          console.log(feature);
           if (metadata.name) {
             metadata.name =
               /* html */ `<a target="_blank" href="https://dblp.org/search/author?q=${
@@ -115,6 +117,11 @@ export default class PluginGLLayer extends HTMLElement {
       this.tileMetadata?.replace(/^.\//, this.configBaseUrl ?? "./"),
     ).then((res) => res.json());
 
+    const nodeColours = await fetch(
+      this.nodeColours?.replace(/^.\//, this.configBaseUrl ?? "./"),
+    ).then((res) => res.json());
+
+
     return {
       version: 8,
       glyphs: this.glyphSource,
@@ -134,7 +141,7 @@ export default class PluginGLLayer extends HTMLElement {
       },
       layers: [
         this.#generateStyleForEdges(),
-        ...this.#generateStyleForPersonNodes(),
+        ...this.#generateStyleForPersonNodes(nodeColours),
         // ...this.#generateStyleForConferenceNodes(),
         this.#generateStyleForPersonLabels(),
         // this.#generateStyleForConferenceLabels(),
@@ -320,42 +327,70 @@ export default class PluginGLLayer extends HTMLElement {
     ).filter(Boolean);
   }
 
-  #generateStyleForPersonNodes() {
-    return this.conferences?.map((
-      conference,
-      i,
-    ) => {
-      let x = this.#conferenceSelections[i]
-        ? ({
-          id: `points_${i}`,
-          source: "dblp",
-          "source-layer": "dblp",
-          type: "circle",
-          filter: [
-            "all",
-            [
-              "==",
-              ["get", "type"],
-              "person",
-            ],
-            [
-              "in",
-              `"${conference}"`,
-              ["get", "conferences"],
-            ],
-          ],
-          paint: {
-            "circle-radius": 5,
-            "circle-color": this.conferenceColors[i],
-            "circle-opacity": 0.5,
-          },
-        })
-        : null;
+  #generateStyleForPersonNodes(nodeColours) {
+    // let x = this.conferences?.map((
+    //   conference,
+    //   i,
+    // ) =>
+    //   this.#conferenceSelections[i]
+    //     ? ({
+    //       id: `points_${i}`,
+    //       source: "dblp",
+    //       "source-layer": "dblp",
+    //       type: "circle",
+    //       filter: [
+    //         "all",
+    //         [
+    //           "==",
+    //           ["get", "type"],
+    //           "person",
+    //         ],
+    //         [
+    //           "in",
+    //           `"${conference}"`,
+    //           ["get", "conferences"],
+    //         ],
+    //       ],
+    //       paint: {
+    //         "circle-radius": 5,
+    //         "circle-color": this.conferenceColors[i],
+    //         "circle-opacity": 0.5,
+    //       },
+    //     })
+    //     : null
+    // ).filter(Boolean);
+    // console.log(x);
+    // return(x);
 
-        console.log(x);
-        return(x);
-            }
-    ).filter(Boolean);
+    let colours = [];
+    for (let node in nodeColours) {
+      colours.push({
+        id: node,
+        source: "dblp",
+        "source-layer": "dblp",
+        type: "circle",
+        filter: [
+          "all",
+          [
+            "==",
+            ["get", "type"],
+            "person",
+          ],
+          // [
+          //   "in",
+          //   `"${conference}"`,
+          //   ["get", "conferences"],
+          // ],
+        ],
+        paint: {
+          "circle-radius": 5,
+          "circle-color": nodeColours[node],
+          "circle-opacity": 0.5,
+        },
+      });
+    }
+    console.log(colours);
+    return colours;
   }
 
   get #styleSheet() {

@@ -9,7 +9,7 @@ const INPUT_PATH = path.join(import.meta.dirname, "../data/graph.geojson");
 const OUTPUT_TILES_DIR_PATH = path.join(import.meta.dirname, "../data/tiles");
 
 const MAXIMUM_ZOOM = null;
-const EXTEND_ZOOMS_IF_STILL_DROPPING = true;
+const EXTEND_ZOOMS_IF_STILL_DROPPING = false;
 const MAXIMUM_TILE_BYTES = 5_000_000;
 const MAXIMUM_TILE_FEATURES = 50_000;
 
@@ -21,7 +21,7 @@ const options = [
     "--layer=dblp",
     "--base-zoom=0",
 ];
-options.push(MAXIMUM_ZOOM ? `-z${MAXIMUM_ZOOM}` : "-zg");
+options.push(MAXIMUM_ZOOM ? `-z${MAXIMUM_ZOOM}` : "-z6");
 if (EXTEND_ZOOMS_IF_STILL_DROPPING) {
     options.push("--extend-zooms-if-still-dropping");
 }

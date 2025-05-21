@@ -324,8 +324,8 @@ export default class PluginGLLayer extends HTMLElement {
     return this.conferences?.map((
       conference,
       i,
-    ) =>
-      this.#conferenceSelections[i]
+    ) => {
+      let x = this.#conferenceSelections[i]
         ? ({
           id: `points_${i}`,
           source: "dblp",
@@ -350,7 +350,11 @@ export default class PluginGLLayer extends HTMLElement {
             "circle-opacity": 0.5,
           },
         })
-        : null
+        : null;
+
+        console.log(x);
+        return(x);
+            }
     ).filter(Boolean);
   }
 

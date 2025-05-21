@@ -24,6 +24,12 @@ const DB_PATH = path.join(
     "../data/dblp.sqlite3",
 );
 
+/* Added new json output */
+const FREQ_JSON_OUTPUT_PATH = path.join(
+    import.meta.dirname,
+    "../data/frequency.json",
+)
+
 const db = openDB(
     DB_PATH,
     // { verbose: console.log }
@@ -84,6 +90,8 @@ await fs.writeFile(
 
 const groupedByPerson = Object.groupBy(queryResult, ({ person }) => person);
 
+let frequentConferences = {};
+
 NODES_AND_EDGES.nodes.forEach(async (node) => {
     const personId = node.id;
     const recordsForPerson = groupedByPerson[personId];
@@ -91,6 +99,25 @@ NODES_AND_EDGES.nodes.forEach(async (node) => {
         recordsForPerson,
         ({ conference }) => conference,
     );
+    
+    /* Compute totals per conference for colouring of nodes */
+    let maxNum = 0;
+    let maxConf = '';
+    for (let conf in groupedByConference) {
+        let count = 0;
+        for (let i = 0; i < groupedByConference[conf].length; i++) {
+            count += groupedByConference[conf][i].count;
+        };
+        if (maxNum < count) {
+                maxNum = count;
+                maxConf = conf;
+            }
+    }
+    // console.log(personId.toString() + " " + maxConf + " " + maxNum.toString());
+
+    frequentConferences[personId] = maxConf;
+    
+
     const result = INTERESTED_CONFERENCES.map(([label]) => {
         const recordsForConference = groupedByConference[label];
         const groupedByYear = recordsForConference
@@ -106,5 +133,10 @@ NODES_AND_EDGES.nodes.forEach(async (node) => {
         csvFormatBody(result),
     );
 });
+
+await fs.writeFile(
+    FREQ_JSON_OUTPUT_PATH,
+    JSON.stringify(frequentConferences)
+);
 
 console.timeEnd(TIMER_LABEL);

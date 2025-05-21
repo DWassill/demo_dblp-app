@@ -11,6 +11,11 @@ import INTERESTED_YEAR_RANGE from "../config/year-range.json" with {
 import NODES_AND_EDGES from "../data/nodes-and-edges.json" with {
     type: "json",
 };
+/* ADDED COLOURS IMPORT */
+import CONFERENCE_COLOURS  from "../config/colors.json" with {
+    type: "json",
+};
+
 
 const TIMER_LABEL = "Generating the time-series";
 console.time(TIMER_LABEL);
@@ -27,7 +32,7 @@ const DB_PATH = path.join(
 /* Added new json output */
 const FREQ_JSON_OUTPUT_PATH = path.join(
     import.meta.dirname,
-    "../data/frequency.json",
+    "../data/nodeColours.json",
 )
 
 const db = openDB(
@@ -88,6 +93,12 @@ await fs.writeFile(
     JSON.stringify(metadata),
 );
 
+let conferenceToColour = {};
+for (let j = 0; j < INTERESTED_CONFERENCES.length; j++) {
+    conferenceToColour[INTERESTED_CONFERENCES[j][0]] = CONFERENCE_COLOURS[j];
+}
+console.log(conferenceToColour);
+
 const groupedByPerson = Object.groupBy(queryResult, ({ person }) => person);
 
 let frequentConferences = {};
@@ -103,19 +114,20 @@ NODES_AND_EDGES.nodes.forEach(async (node) => {
     /* Compute totals per conference for colouring of nodes */
     let maxNum = 0;
     let maxConf = '';
+    let maxColour = '';
     for (let conf in groupedByConference) {
         let count = 0;
         for (let i = 0; i < groupedByConference[conf].length; i++) {
             count += groupedByConference[conf][i].count;
         };
         if (maxNum < count) {
-                maxNum = count;
-                maxConf = conf;
-            }
+            maxNum = count;
+            maxConf = conf;
+            maxColour = conferenceToColour[maxConf];
+        }
     }
-    // console.log(personId.toString() + " " + maxConf + " " + maxNum.toString());
 
-    frequentConferences[personId] = maxConf;
+    frequentConferences[personId] = maxColour;
     
 
     const result = INTERESTED_CONFERENCES.map(([label]) => {

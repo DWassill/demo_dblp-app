@@ -20,7 +20,6 @@ const db = openDB(
 );
 
 const _nodes = db.prepare(
-    /* likely do finding of frequency of conferences in here */
     /* sql */ `    
     SELECT DISTINCT
         pp.person_id AS id,

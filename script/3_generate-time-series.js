@@ -32,7 +32,7 @@ const DB_PATH = path.join(
 /* Added new json output */
 const FREQ_JSON_OUTPUT_PATH = path.join(
     import.meta.dirname,
-    "../data/node-colours.json",
+    "../data/frequent-conference.json",
 )
 
 const db = openDB(
@@ -88,6 +88,7 @@ const queryResult = db.prepare(
 
 const allValues = queryResult.map((d) => d.count);
 const metadata = { min: 0, max: max(allValues) };
+console.log(metadata);
 await fs.writeFile(
     path.join(OUTPUT_DIR_PATH, `metadata.json`),
     JSON.stringify(metadata),
@@ -123,11 +124,11 @@ NODES_AND_EDGES.nodes.forEach(async (node) => {
         if (maxNum < count) {
             maxNum = count;
             maxConf = conf;
-            maxColour = conferenceToColour[maxConf];
+            //maxColour = conferenceToColour[maxConf];
         }
     }
 
-    frequentConferences[personId] = maxColour;
+    frequentConferences[personId] = maxConf;
     
 
     const result = INTERESTED_CONFERENCES.map(([label]) => {

@@ -5,6 +5,9 @@ import NODES_LAYOUT from "../data/nodes-layout.json" with { type: "json" };
 import NODES_AND_EDGES from "../data/nodes-and-edges.json" with {
     type: "json",
 };
+import FREQUENT_CONFERENCES from "../data/frequent-conference.json" with {
+    type: "json",
+};
 
 const TIMER_LABEL = "Generating the GeoJSON";
 console.time(TIMER_LABEL);
@@ -46,6 +49,7 @@ const geojsonObject = {
             orcid: node.orcid,
             type: node.type,
             conferences: node.conferences,
+            frequent: [FREQUENT_CONFERENCES[node.id]],
         },
     })).concat(NODES_AND_EDGES.edges.map(({ source, target, conferences }) => {
         const node1 = NODES_LAYOUT.find((n) => n.id === source);

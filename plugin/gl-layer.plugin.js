@@ -75,6 +75,7 @@ export default class PluginGLLayer extends HTMLElement {
       this.conferences?.map((_, i) => [i, true]),
     );
     const style = await this.#generateMapStyle();
+    console.log(style);
     this.#layerInstance = maplibreLayer({
       style,
       interactive: true,
@@ -117,11 +118,6 @@ export default class PluginGLLayer extends HTMLElement {
       this.tileMetadata?.replace(/^.\//, this.configBaseUrl ?? "./"),
     ).then((res) => res.json());
 
-    const nodeColours = await fetch(
-      this.nodeColours?.replace(/^.\//, this.configBaseUrl ?? "./"),
-    ).then((res) => res.json());
-
-
     return {
       version: 8,
       glyphs: this.glyphSource,
@@ -141,7 +137,7 @@ export default class PluginGLLayer extends HTMLElement {
       },
       layers: [
         this.#generateStyleForEdges(),
-        ...this.#generateStyleForPersonNodes(nodeColours),
+        ...this.#generateStyleForPersonNodes(),
         // ...this.#generateStyleForConferenceNodes(),
         this.#generateStyleForPersonLabels(),
         // this.#generateStyleForConferenceLabels(),
@@ -327,70 +323,76 @@ export default class PluginGLLayer extends HTMLElement {
     ).filter(Boolean);
   }
 
-  #generateStyleForPersonNodes(nodeColours) {
-    // let x = this.conferences?.map((
-    //   conference,
-    //   i,
-    // ) => {
-    //   let y = this.#conferenceSelections[i]
-    //     ? ({
-    //       id: `points_${i}`,
-    //       source: "dblp",
-    //       "source-layer": "dblp",
-    //       type: "circle",
-    //       filter: [
-    //         "all",
-    //         [
-    //           "==",
-    //           ["get", "type"],
-    //           "person",
-    //         ],
-    //         // [
-    //         //   "in",
-    //         //   `"${conference}"`,
-    //         //   ["get", "conferences"],
-    //         // ],
-    //       ],
-    //       paint: {
-    //         "circle-radius": 5,
-    //         "circle-color": this.conferenceColors[i],
-    //         "circle-opacity": 0.5,
-    //       },
-    //     })
-    //     : null;
-    //     return y;
-    // }).filter(Boolean);
-    // return(x);
-
-    let colours = [];
-    for (let node in nodeColours) {
-      colours.push({
-        id: `points_${node}`,
-        source: "dblp",
-        "source-layer": "dblp",
-        type: "circle",
-        filter: [
-          "all",
-          [
-            "==",
-            ["get", "type"],
-            "person",
+  #generateStyleForPersonNodes() {
+    let x = this.conferences?.map((
+      conference,
+      i,
+    ) => {
+      let y = this.#conferenceSelections[i]
+        ? ({
+          id: `points_${i}`,
+          source: "dblp",
+          "source-layer": "dblp",
+          type: "circle",
+          filter: [
+            "all",
+            [
+              "==",
+              ["get", "type"],
+              "person",
+            ],
+            // [
+            //   "in",
+            //   `"${conference}"`,
+            //   ["get", "conferences"],
+            // ],
+            [
+              "in",
+              `"${conference}"`,
+              ["get", "frequent"],
+            ],
           ],
-          // [
-          //   "in",
-          //   `"${node}"`,
-          //   ["get", "id"],
-          // ],
-        ],
-        paint: {
-          "circle-radius": 5,
-          "circle-color": nodeColours[node],
-          "circle-opacity": 0.5,
-        },
-      });
-    }
-    console.log(colours);
-    return colours;
+          paint: {
+            "circle-radius": 5,
+            "circle-color": this.conferenceColors[i],
+            "circle-opacity": 0.5,
+          },
+        })
+        : null;
+        return y;
+    }).filter(Boolean);
+    console.log(x);
+    return(x);
+
+    // let colours = [];
+    // for (let node in nodeColours) {
+    //   colours.push({
+    //     id: `points_${node}`,
+    //     source: "dblp",
+    //     "source-layer": "dblp",
+    //     type: "circle",
+    //     filter: [
+    //       "all",
+    //       [
+    //         "==",
+    //         ["get", "type"],
+    //         "person",
+    //       ],
+    //       // [
+    //       //   "in",
+    //       //   `"${node}"`,
+    //       //   ["get", "id"],
+    //       // ],
+    //     ],
+    //     paint: {
+    //       "circle-radius": 5,
+    //       "circle-color": nodeColours[node],
+    //       "circle-opacity": 0.5,
+    //     },
+    //   });
+    // }
+    // console.log(colours);
+    // return colours;
   }
 
   get #styleSheet() {

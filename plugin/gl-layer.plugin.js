@@ -331,8 +331,8 @@ export default class PluginGLLayer extends HTMLElement {
     // let x = this.conferences?.map((
     //   conference,
     //   i,
-    // ) =>
-    //   this.#conferenceSelections[i]
+    // ) => {
+    //   let y = this.#conferenceSelections[i]
     //     ? ({
     //       id: `points_${i}`,
     //       source: "dblp",
@@ -345,11 +345,11 @@ export default class PluginGLLayer extends HTMLElement {
     //           ["get", "type"],
     //           "person",
     //         ],
-    //         [
-    //           "in",
-    //           `"${conference}"`,
-    //           ["get", "conferences"],
-    //         ],
+    //         // [
+    //         //   "in",
+    //         //   `"${conference}"`,
+    //         //   ["get", "conferences"],
+    //         // ],
     //       ],
     //       paint: {
     //         "circle-radius": 5,
@@ -357,15 +357,15 @@ export default class PluginGLLayer extends HTMLElement {
     //         "circle-opacity": 0.5,
     //       },
     //     })
-    //     : null
-    // ).filter(Boolean);
-    // console.log(x);
+    //     : null;
+    //     return y;
+    // }).filter(Boolean);
     // return(x);
 
     let colours = [];
     for (let node in nodeColours) {
       colours.push({
-        id: node,
+        id: `points_${node}`,
         source: "dblp",
         "source-layer": "dblp",
         type: "circle",
@@ -378,8 +378,8 @@ export default class PluginGLLayer extends HTMLElement {
           ],
           // [
           //   "in",
-          //   `"${conference}"`,
-          //   ["get", "conferences"],
+          //   `"${node}"`,
+          //   ["get", "id"],
           // ],
         ],
         paint: {

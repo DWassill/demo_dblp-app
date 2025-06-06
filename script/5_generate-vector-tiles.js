@@ -15,7 +15,7 @@ const MAXIMUM_TILE_FEATURES = 50_000;
 
 const options = [
     "--no-tile-compression",
-    // "--drop-densest-as-needed",
+    "--drop-densest-as-needed",
     "--coalesce-densest-as-needed",
     "--read-parallel",
     "--layer=dblp",

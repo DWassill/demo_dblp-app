@@ -341,11 +341,6 @@ export default class PluginGLLayer extends HTMLElement {
               ["get", "type"],
               "person",
             ],
-            // [
-            //   "in",
-            //   `"${conference}"`,
-            //   ["get", "conferences"],
-            // ],
             [
               "in",
               `"${conference}"`,

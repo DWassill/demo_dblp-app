@@ -60,6 +60,7 @@ const nodes = Object.values(_groupedNodes).map((records) => (
         name: records[0].name,
         orcid: records[0].orcid,
         conferences: records.map(({ conference }) => conference),
+        priority: 0
     }
 ));
 
@@ -105,8 +106,40 @@ const edges = Object.values(_groupedEdges).map((records) => (
         source: records[0].source,
         target: records[0].target,
         conferences: records.map(({ conference }) => conference),
+        priority: -1
     }
 ));
+
+let degree_map = new Map();
+for (let i = 0; i < edges.length; i++) {
+    let s = edges[i].source;
+    let t = edges[i].target;
+
+    if (degree_map.has(s)) {
+        degree_map.set(s, degree_map.get(s) + 1)
+    }
+    else {
+        degree_map.set(s, 1);
+    }
+
+    if (degree_map.has(t)) {
+        degree_map.set(t, degree_map.get(t) + 1)
+    }
+    else {
+        degree_map.set(t, 1);
+    }
+}
+
+for (let i = 0; i < nodes.length; i++) {
+    let node_id = nodes[i].id;
+    let degree = degree_map.get(node_id);
+    if (degree != undefined) {
+        nodes[i].priority = degree;
+    }
+}
+
+console.log(nodes);
+
 
 console.timeLog(TIMER_LABEL, "edges generated");
 

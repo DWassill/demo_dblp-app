@@ -50,6 +50,7 @@ const geojsonObject = {
             type: node.type,
             conferences: node.conferences,
             frequent: [FREQUENT_CONFERENCES[node.id]],
+            priority: node.priority
         },
     })).concat(NODES_AND_EDGES.edges.map(({ source, target, conferences }) => {
         const node1 = NODES_LAYOUT.find((n) => n.id === source);

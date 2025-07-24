@@ -16,10 +16,12 @@ const MAXIMUM_TILE_FEATURES = 50_000;
 const options = [
     "--no-tile-compression",
     // "--drop-densest-as-needed",
-    "--coalesce-densest-as-needed",
-    "--read-parallel",
-    "--cluster-distance=10",
-    //"--order-by=priority",
+    //"--coalesce-densest-as-needed",
+    //"--read-parallel",
+    "--cluster-distance=20",
+    // "--aggregate-cluster",
+    "--keep-point-cluster-position",
+    //"--drop-rate=2",
     "--layer=dblp",
     "--base-zoom=0",
 ];

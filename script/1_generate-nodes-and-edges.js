@@ -141,9 +141,6 @@ for (let i = 0; i < nodes.length; i++) {
     }
 }
 
-console.log(edges);
-
-
 console.timeLog(TIMER_LABEL, "edges generated");
 
 await fs.mkdir(path.dirname(OUTPUT_DIR_PATH), { recursive: true });

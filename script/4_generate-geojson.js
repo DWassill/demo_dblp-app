@@ -39,6 +39,7 @@ const geojsonObject = {
     type: "FeatureCollection",
     features: NODES_LAYOUT.map((node) => ({
         type: "Feature",
+        id: node.id,
         geometry: {
             type: "Point",
             coordinates: [scaleX(node.x), scaleY(node.y)],
@@ -52,11 +53,12 @@ const geojsonObject = {
             frequent: [FREQUENT_CONFERENCES[node.id]],
             priority: node.priority
         },
-    })).concat(NODES_AND_EDGES.edges.map(({ source, target, conferences }) => {
+    })).concat(NODES_AND_EDGES.edges.map(({ source, target, conferences, priority, id }) => {
         const node1 = NODES_LAYOUT.find((n) => n.id === source);
         const node2 = NODES_LAYOUT.find((n) => n.id === target);
         return {
             type: "Feature",
+            id: id,
             geometry: {
                 type: "LineString",
                 coordinates: [
@@ -68,6 +70,7 @@ const geojsonObject = {
                 source,
                 target,
                 conferences,
+                priority: priority,
             },
         };
     })),

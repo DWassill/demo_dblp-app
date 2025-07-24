@@ -106,7 +106,8 @@ const edges = Object.values(_groupedEdges).map((records) => (
         source: records[0].source,
         target: records[0].target,
         conferences: records.map(({ conference }) => conference),
-        priority: -1
+        priority: -1,
+        id: 0,
     }
 ));
 
@@ -128,6 +129,8 @@ for (let i = 0; i < edges.length; i++) {
     else {
         degree_map.set(t, 1);
     }
+
+    edges[i].id =  2147483647 - i;
 }
 
 for (let i = 0; i < nodes.length; i++) {
@@ -138,7 +141,7 @@ for (let i = 0; i < nodes.length; i++) {
     }
 }
 
-console.log(nodes);
+console.log(edges);
 
 
 console.timeLog(TIMER_LABEL, "edges generated");

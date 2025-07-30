@@ -18,6 +18,7 @@ const options = [
     // "--drop-densest-as-needed",
     //"--coalesce-densest-as-needed",
     //"--read-parallel",
+    "--leave-lines",
     "--cluster-distance=20",
     // "--aggregate-cluster",
     "--keep-point-cluster-position",
@@ -25,7 +26,7 @@ const options = [
     "--layer=dblp",
     "--base-zoom=0",
 ];
-options.push(MAXIMUM_ZOOM ? `-z${MAXIMUM_ZOOM}` : "-z6");
+options.push(MAXIMUM_ZOOM ? `-z${MAXIMUM_ZOOM}` : "-z5");
 if (EXTEND_ZOOMS_IF_STILL_DROPPING) {
     options.push("--extend-zooms-if-still-dropping");
 }

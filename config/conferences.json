@@ -1,14 +1,14 @@
 [
     [
-        "CALDAM",
-        "^CALDAM$"
+        "SWAT",
+        "^SWAT$"
     ],
     [
-        "COCOA",
-        "^COCOA$"
+        "WADS",
+        "^WADS$"
     ],
     [
-        "COCOON",
-        "^COCOON$"
+        "WALCOM",
+        "^WALCOM$"
     ]
 ]

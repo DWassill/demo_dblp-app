@@ -1,23 +1,23 @@
 [
     [
-        "CALDAM"
+        "SWAT"
     ],
     [
-        "COCOA"
+        "WADS"
     ],
     [
-        "COCOON"
+        "WALCOM"
     ],
     [
-        "CALDAM + COCOA"
+        "SWAT + WADS"
     ],
     [
-        "CALDAM + COCOON"
+        "SWAT + WALCOM"
     ],
     [
-        "COCOA + COCOON"
-    ],
+        "WADS + WALCOM"
+    ],   
     [
-        "CALDAM + COCOA + COCOON"
+        "SWAT + WADS + WALCOM"
     ]
 ]

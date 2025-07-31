@@ -5,6 +5,9 @@ import NODES_LAYOUT from "../data/nodes-layout.json" with { type: "json" };
 import NODES_AND_EDGES from "../data/nodes-and-edges.json" with {
     type: "json",
 };
+import FREQUENT_CONFERENCES from "../data/frequent-conference.json" with {
+    type: "json",
+};
 
 const TIMER_LABEL = "Generating the GeoJSON";
 console.time(TIMER_LABEL);
@@ -36,6 +39,7 @@ const geojsonObject = {
     type: "FeatureCollection",
     features: NODES_LAYOUT.map((node) => ({
         type: "Feature",
+        id: node.id,
         geometry: {
             type: "Point",
             coordinates: [scaleX(node.x), scaleY(node.y)],
@@ -46,12 +50,15 @@ const geojsonObject = {
             orcid: node.orcid,
             type: node.type,
             conferences: node.conferences,
+            frequent: [FREQUENT_CONFERENCES[node.id]],
+            priority: node.priority
         },
-    })).concat(NODES_AND_EDGES.edges.map(({ source, target, conferences }) => {
+    })).concat(NODES_AND_EDGES.edges.map(({ source, target, conferences, priority, id }) => {
         const node1 = NODES_LAYOUT.find((n) => n.id === source);
         const node2 = NODES_LAYOUT.find((n) => n.id === target);
         return {
             type: "Feature",
+            id: id,
             geometry: {
                 type: "LineString",
                 coordinates: [
@@ -63,6 +70,7 @@ const geojsonObject = {
                 source,
                 target,
                 conferences,
+                priority: priority,
             },
         };
     })),

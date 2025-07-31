@@ -1,0 +1,299 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          144.27746827589303,
+          -9.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 1,
+        "name": "1",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "source": 5,
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          147.27746827589303,
+          -6.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 2,
+        "name": "2",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          155.27746827589303,
+          3.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 3,
+        "name": "3",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          149.27746827589303,
+          -4.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 4,
+        "name": "4",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          150.27746827589303,
+          6.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 5,
+        "name": "5",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 5
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.27746827589303,
+          5.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 6,
+        "name": "6-1",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.277468275893035,
+          5.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 7,
+        "name": "7-2",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.277468275893035,
+          -4.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 8,
+        "name": "8-3",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.277468275893035,
+          1.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 9,
+        "name": "9-4",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.277468275893035,
+          -2.462150016020919
+        ]
+      },
+      "properties": {
+        "id": 10,
+        "name": "10-5",
+        "orcid": "0009-0007-6528-7064",
+        "type": "person",
+        "conferences": [
+          "COCOON"
+        ],
+        "frequent": [
+          "COCOON"
+        ],
+        "priority": 5
+      }
+    },
+
+
+
+    {
+      "type": "Feature",
+      "id": 101,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            144.27746827589303,
+            -9.462150016020919
+          ],
+          [
+            147.27746827589303,
+            -6.462150016020919
+          ]
+        ]
+      },
+      "properties": {
+        "source": 1,
+        "target": 2,
+        "conferences": [
+          "CALDAM"
+        ],
+        "priority": -1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 102,
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            147.27746827589303,
+            -6.462150016020919
+          ],
+          [
+            150.27746827589303,
+            6.462150016020919
+          ]
+        ]
+      },
+      "properties": {
+        "source": 2,
+        "target": 5,
+        "conferences": [
+          "CALDAM"
+        ],
+        "priority": -1
+      }
+    }
+  ]
+}

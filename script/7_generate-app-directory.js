@@ -23,12 +23,6 @@ await fs.cp(
 );
 console.timeLog(TIMER_LABEL, `tiles copied`);
 
-// Added copying node colours to dist directory
-await fs.cp(
-    path.join(import.meta.dirname, "../data/node-colours.json"),
-    path.join(OUTPUT_DIR_PATH, "./node-colours.json"),
-);
-console.timeLog(TIMER_LABEL, `Node colours copied`);
 
 await fs.cp(
     path.join(import.meta.dirname, "../data/time-series"),

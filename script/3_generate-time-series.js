@@ -32,7 +32,7 @@ const DB_PATH = path.join(
 /* Added new json output */
 const FREQ_JSON_OUTPUT_PATH = path.join(
     import.meta.dirname,
-    "../data/node-colours.json",
+    "../data/frequent-conference.json",
 )
 
 const db = openDB(
@@ -93,12 +93,6 @@ await fs.writeFile(
     JSON.stringify(metadata),
 );
 
-let conferenceToColour = {};
-for (let j = 0; j < INTERESTED_CONFERENCES.length; j++) {
-    conferenceToColour[INTERESTED_CONFERENCES[j][0]] = CONFERENCE_COLOURS[j];
-}
-console.log(conferenceToColour);
-
 const groupedByPerson = Object.groupBy(queryResult, ({ person }) => person);
 
 let frequentConferences = {};
@@ -114,20 +108,26 @@ NODES_AND_EDGES.nodes.forEach(async (node) => {
     /* Compute totals per conference for colouring of nodes */
     let maxNum = 0;
     let maxConf = '';
-    let maxColour = '';
+    let stringCombo = ''
+    let totals = {}
     for (let conf in groupedByConference) {
         let count = 0;
         for (let i = 0; i < groupedByConference[conf].length; i++) {
             count += groupedByConference[conf][i].count;
         };
-        if (maxNum < count) {
-            maxNum = count;
-            maxConf = conf;
-            maxColour = conferenceToColour[maxConf];
+        totals[conf] = count;
+        if (count != 0) {
+            if (stringCombo.length != 0) {
+                stringCombo += " + ";
+            }
+            stringCombo += conf;
         }
     }
+    console.log(stringCombo);
 
-    frequentConferences[personId] = maxColour;
+
+    
+    frequentConferences[personId] = stringCombo;
     
 
     const result = INTERESTED_CONFERENCES.map(([label]) => {

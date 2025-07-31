@@ -1,6 +1,6 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
-import INTERESTED_CONFERENCES from "../config/conferences.json" with {
+import INTERESTED_CONFERENCES from "../config/conference-combos.json" with {
     type: "json",
 };
 import CONFERENCE_COLORS from "../config/colors.json" with { type: "json" };

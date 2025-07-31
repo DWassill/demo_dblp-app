@@ -1,6 +1,6 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
-import INTERESTED_CONFERENCES from "../config/conference-combos.json" with {
+import INTERESTED_CONFERENCES from "../config/conferences.json" with {
     type: "json",
 };
 import CONFERENCE_COLORS from "../config/colors.json" with { type: "json" };
@@ -8,6 +8,10 @@ import INTERESTED_YEAR_RANGE from "../config/year-range.json" with {
     type: "json",
 };
 import TIME_SERIES_MATADATA from "../data/time-series/metadata.json" with {
+    type: "json",
+};
+
+import CONFERENCE_COMBOS from "../config/conference-combos.json" with {
     type: "json",
 };
 
@@ -66,6 +70,7 @@ const config = {
                 nodeColours: "./node-colours.json",
                 conferences: INTERESTED_CONFERENCES.map(([label]) => label),
                 conferenceColors: CONFERENCE_COLORS,
+                conferenceCombos: CONFERENCE_COMBOS,
             },
         },
         {

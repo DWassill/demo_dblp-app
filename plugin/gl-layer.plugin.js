@@ -23,6 +23,7 @@ export default class PluginGLLayer extends HTMLElement {
   errorTileURL = "data:application/x-protobuf;base64,";
   tileMetadata = "./data/tiles/metadata.json";
   conferences = [];
+  conferenceCombos = [];
   conferenceColors = [];
   metadataStateKey = "metadata";
   //#endregion
@@ -62,6 +63,30 @@ export default class PluginGLLayer extends HTMLElement {
       el.addEventListener("change", async ({ currentTarget }) => {
         const conferenceIndex = +currentTarget.dataset.conferenceIndex;
         this.#conferenceSelections[conferenceIndex] = currentTarget.checked;
+        if (this.#conferenceSelections != null) {
+      for (let i = 3; i <= 6; i++) {
+        this.#conferenceSelections[i] = false;
+      }
+
+      if (this.#conferenceSelections[0]) {
+        this.#conferenceSelections[3] = true;
+        this.#conferenceSelections[4] = true;
+        this.#conferenceSelections[6] = true;
+      }
+      if (this.#conferenceSelections[1]) {
+        this.#conferenceSelections[3] = true;
+        this.#conferenceSelections[5] = true;
+        this.#conferenceSelections[6] = true;
+      }
+      if (this.#conferenceSelections[2]) {
+        this.#conferenceSelections[4] = true;
+        this.#conferenceSelections[5] = true;
+        this.#conferenceSelections[6] = true;
+      }
+    }
+    
+    console.log(this.#conferenceSelections);
+        
         this.#layerInstance
           .getMaplibreMap().setStyle(await this.#generateMapStyle());
         this.renderUI();
@@ -72,10 +97,9 @@ export default class PluginGLLayer extends HTMLElement {
   async #initializeMapLayer() {
     this.#layerInstance && this.removeMapLayerDelegate?.(this.#layerInstance);
     this.#conferenceSelections = Object.fromEntries(
-      this.conferences?.map((_, i) => [i, true]),
+      this.conferenceCombos?.map((_, i) => [i, true]),
     );
     const style = await this.#generateMapStyle();
-    console.log(style);
     this.#layerInstance = maplibreLayer({
       style,
       interactive: true,
@@ -324,7 +348,7 @@ export default class PluginGLLayer extends HTMLElement {
   }
 
   #generateStyleForPersonNodes() {
-    let x = this.conferences?.map((
+    let x = this.conferenceCombos?.map((
       conference,
       i,
     ) => {
@@ -341,6 +365,11 @@ export default class PluginGLLayer extends HTMLElement {
               ["get", "type"],
               "person",
             ],
+            // [
+            //   "in",
+            //   `"${conference}"`,
+            //   ["get", "conferences"],
+            // ],
             [
               "in",
               `"${conference}"`,

@@ -384,6 +384,7 @@ export default class PluginGLLayer extends HTMLElement {
         })
         : null;
         return y;
+
     }).filter(Boolean);
     console.log(x);
     return(x);

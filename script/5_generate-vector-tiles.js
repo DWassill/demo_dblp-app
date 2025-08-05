@@ -16,16 +16,21 @@ const MAXIMUM_TILE_FEATURES = 50_000;
 const options = [
     "--no-tile-compression",
     // "--drop-densest-as-needed",
-    //"--coalesce-densest-as-needed",
-    //"--read-parallel",
+    // "--coalesce-densest-as-needed",
+    // "--read-parallel",
     // "--leave-lines",
-    "--cluster-distance=20",
-    "--aggregate-cluster",
+    //"--cluster-distance=20",
+    // "--aggregate-cluster",
     "--keep-point-cluster-position",
-    //"--drop-rate=2",
     "--layer=dblp",
     "--base-zoom=0",
 ];
+
+for (let i = 2; i < process.argv.length; i++) {
+    options.push(process.argv[i]);
+    console.log("added option" + process.argv[i]);
+} 
+
 options.push(MAXIMUM_ZOOM ? `-z${MAXIMUM_ZOOM}` : "-z4");
 if (EXTEND_ZOOMS_IF_STILL_DROPPING) {
     options.push("--extend-zooms-if-still-dropping");

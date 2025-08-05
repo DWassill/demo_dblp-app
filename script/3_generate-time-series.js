@@ -106,8 +106,6 @@ NODES_AND_EDGES.nodes.forEach(async (node) => {
     );
     
     /* Compute totals per conference for colouring of nodes */
-    let maxNum = 0;
-    let maxConf = '';
     let stringCombo = ''
     let totals = {}
     for (let conf in groupedByConference) {
@@ -123,8 +121,6 @@ NODES_AND_EDGES.nodes.forEach(async (node) => {
             stringCombo += conf;
         }
     }
-    console.log(stringCombo);
-
 
     
     frequentConferences[personId] = stringCombo;

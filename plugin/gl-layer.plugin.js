@@ -386,38 +386,7 @@ export default class PluginGLLayer extends HTMLElement {
         return y;
 
     }).filter(Boolean);
-    console.log(x);
     return(x);
-
-    // let colours = [];
-    // for (let node in nodeColours) {
-    //   colours.push({
-    //     id: `points_${node}`,
-    //     source: "dblp",
-    //     "source-layer": "dblp",
-    //     type: "circle",
-    //     filter: [
-    //       "all",
-    //       [
-    //         "==",
-    //         ["get", "type"],
-    //         "person",
-    //       ],
-    //       // [
-    //       //   "in",
-    //       //   `"${node}"`,
-    //       //   ["get", "id"],
-    //       // ],
-    //     ],
-    //     paint: {
-    //       "circle-radius": 5,
-    //       "circle-color": nodeColours[node],
-    //       "circle-opacity": 0.5,
-    //     },
-    //   });
-    // }
-    // console.log(colours);
-    // return colours;
   }
 
   get #styleSheet() {
